@@ -18,7 +18,7 @@ import NodeWallet from '@coral-xyz/anchor/dist/cjs/nodewallet'
 export async function createUserAndFund(
   provider: SolanaContribProvider,
   user: Keypair = Keypair.generate(),
-  sol_amount: number = 5
+  sol_amount = 5
 ): Promise<Keypair> {
   // Fund user with some SOL
   const tx = new TransactionEnvelope(provider, [], [])

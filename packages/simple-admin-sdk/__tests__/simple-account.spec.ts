@@ -1,5 +1,10 @@
 import { TransactionEnvelope } from '@saberhq/solana-contrib'
-import { CREATE_SIMPLE_ACCOUNT_EVENT, CreateSimpleAccountEvent, simpleAccount, withCreateSimpleAccount } from '../src'
+import {
+  CREATE_SIMPLE_ACCOUNT_EVENT,
+  CreateSimpleAccountEvent,
+  simpleAccount,
+  withCreateSimpleAccount,
+} from '../src'
 import { createUserAndFund, executeTx, initTest } from './test-utils'
 import { Keypair } from '@solana/web3.js'
 
@@ -23,7 +28,11 @@ describe('Create simple admin account', () => {
       )
     })
 
-    const tx = new TransactionEnvelope(solanaProvider, [], [simpleAccountKeypair])
+    const tx = new TransactionEnvelope(
+      solanaProvider,
+      [],
+      [simpleAccountKeypair]
+    )
     await withCreateSimpleAccount(tx.instructions, {
       sdk,
       address: simpleAccountKeypair.publicKey,
@@ -31,7 +40,10 @@ describe('Create simple admin account', () => {
     await executeTx(tx)
 
     // Try to fetch to ensure it exists
-    const rootData = await simpleAccount({ sdk, address: simpleAccountKeypair.publicKey })
+    const rootData = await simpleAccount({
+      sdk,
+      address: simpleAccountKeypair.publicKey,
+    })
 
     // Ensure it has the right data.
     await expect(
@@ -43,5 +55,4 @@ describe('Create simple admin account', () => {
       root: simpleAccountKeypair.publicKey,
     })
   })
-
 })

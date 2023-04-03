@@ -6,7 +6,7 @@ import {
 import { Keypair, PublicKey } from '@solana/web3.js'
 import { Command } from 'commander'
 import { useContext } from '../../context'
-import { withCreateSimpleAccount } from '../../../../simple-admin-sdk/src'
+import { withCreateSimpleAccount } from '@marinade.finance/simple-admin-sdk'
 import { executeTx } from '../utils'
 import { TransactionEnvelope } from '@saberhq/solana-contrib'
 
@@ -19,11 +19,7 @@ export function installCreateRoot(program: Command) {
       'Keypair as address of the new root of simple admin, when not set a random address is generated ',
       parsePubkeyOrKeypair
     )
-    .option(
-      '--admin <pubkey>',
-      'Admin of the account',
-      parsePubkey
-    )
+    .option('--admin <pubkey>', 'Admin of the account', parsePubkey)
     .option(
       '--rent-payer <keypair>',
       'Rent payer for the account creation (default: wallet keypair)',
@@ -59,7 +55,8 @@ async function manageCreateSimpleAccount({
 }) {
   const { sdk, provider, logger } = useContext()
 
-  const addressPubkey = address instanceof PublicKey ? address : address.publicKey
+  const addressPubkey =
+    address instanceof PublicKey ? address : address.publicKey
 
   const tx = new TransactionEnvelope(provider, [], [])
   if (address instanceof Keypair) {
@@ -79,5 +76,7 @@ async function manageCreateSimpleAccount({
     tx,
     `'Failed to create simple admin account ${addressPubkey.toBase58()}`
   )
-  logger.info(`Simple admin account ${addressPubkey.toBase58()} succesfully created`)
+  logger.info(
+    `Simple admin account ${addressPubkey.toBase58()} succesfully created`
+  )
 }

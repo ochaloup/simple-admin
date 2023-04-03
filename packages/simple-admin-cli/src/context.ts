@@ -12,7 +12,7 @@ import {
 } from '@solana/web3.js'
 import { Logger } from 'pino'
 import { CliCommandError } from './commands/error'
-import { SimpleAdminSdk } from '../../simple-admin-sdk/src'
+import { SimpleAdminSdk } from '@marinade.finance/simple-admin-sdk'
 
 export interface Context {
   sdk: SimpleAdminSdk

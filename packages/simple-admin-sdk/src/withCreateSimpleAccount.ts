@@ -23,7 +23,7 @@ export async function withCreateSimpleAccount(
   rentPayer = (rentPayer || sdk.program.provider.publicKey)!
 
   const ix = await sdk.program.methods
-    .createSimpleAccount({admin})
+    .createSimpleAccount({ admin })
     .accountsStrict({
       simpleAccount: address,
       rentPayer,

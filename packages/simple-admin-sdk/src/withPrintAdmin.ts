@@ -1,7 +1,4 @@
-import {
-  PublicKey,
-  TransactionInstruction,
-} from '@solana/web3.js'
+import { PublicKey, TransactionInstruction } from '@solana/web3.js'
 import { SimpleAdminSdk } from './sdk'
 
 export async function withPrintAdmin(
@@ -21,7 +18,7 @@ export async function withPrintAdmin(
   admin = (admin || sdk.program.provider.publicKey)!
 
   const ix = await sdk.program.methods
-    .printAdmin({message})
+    .printAdmin({ message })
     .accountsStrict({
       simpleAdminAccount: address,
       admin,

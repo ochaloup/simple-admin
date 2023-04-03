@@ -13,7 +13,7 @@ import {
 import {
   DEFAULT_SIMPLE_ADMIN_PROGRAM_ID,
   SimpleAdminSdk,
-  root,
+  simpleAccount,
 } from '@marinade.finance/simple-admin-sdk'
 import NodeWallet from '@coral-xyz/anchor/dist/cjs/nodewallet'
 
@@ -21,7 +21,7 @@ beforeAll(() => {
   shellMatchers()
 })
 
-describe('Create root of simple admin using CLI', () => {
+describe('Create simple admin account using CLI', () => {
   const anchorProvider = AnchorProvider.env()
   anchorProvider.opts.skipPreflight = true
   const sdk = new SimpleAdminSdk({
@@ -35,24 +35,34 @@ describe('Create root of simple admin using CLI', () => {
     opts: anchorProvider.opts,
   })
 
-  let rootPath: string
-  let rootKeypair: Keypair
-  let rootCleanup: () => Promise<void>
+  let addressPath: string
+  let addressKeypair: Keypair
+  let addressCleanup: () => Promise<void>
+  let adminPath: string
+  let adminKeypair: Keypair
+  let adminCleanup: () => Promise<void>
 
   beforeEach(async () => {
     // eslint-disable-next-line @typescript-eslint/no-extra-semi
     ;({
-      path: rootPath,
-      keypair: rootKeypair,
-      cleanup: rootCleanup,
+      path: addressPath,
+      keypair: addressKeypair,
+      cleanup: addressCleanup,
+    } = await createTempFileKeypair())
+    // eslint-disable-next-line @typescript-eslint/no-extra-semi
+    ;({
+      path: adminPath,
+      keypair: adminKeypair,
+      cleanup: adminCleanup,
     } = await createTempFileKeypair())
   })
 
   afterEach(async () => {
-    await rootCleanup()
+    await adminCleanup()
+    await addressCleanup()
   })
 
-  it('creates root account with rent payer', async () => {
+  it('creates account with rent payer and admin', async () => {
     const {
       keypair: rentPayerKeypair,
       path: rentPayerPath,
@@ -84,9 +94,11 @@ describe('Create root of simple admin using CLI', () => {
             provider.connection.rpcEndpoint,
             '--program-id',
             sdk.program.programId.toBase58(),
-            'create-root',
+            'create-simple-account',
             '--address',
-            rootPath,
+            addressPath,
+            '--admin',
+            adminKeypair.publicKey.toBase58(),
             '--rent-payer',
             rentPayerPath,
           ],
@@ -101,8 +113,14 @@ describe('Create root of simple admin using CLI', () => {
       await cleanupRentPayer()
     }
 
-    const rootData = await root({ sdk, address: rootKeypair.publicKey })
-    expect(rootData.voteCount.toNumber()).toStrictEqual(0)
+    const rootData = await simpleAccount({
+      sdk,
+      address: addressKeypair.publicKey,
+    })
+    expect(rootData.admin.toBase58()).toStrictEqual(
+      adminKeypair.publicKey.toBase58()
+    )
+    expect(rootData.printCallCount.toNumber()).toStrictEqual(0)
     await expect(
       provider.connection.getBalance(rentPayerKeypair.publicKey)
     ).resolves.toBeLessThan(rentPayerFunds)
@@ -127,7 +145,7 @@ describe('Create root of simple admin using CLI', () => {
           sdk.program.programId.toBase58(),
           'create-root',
           '--address',
-          rootPath,
+          addressKeypair,
           '--print-only',
         ],
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -138,7 +156,7 @@ describe('Create root of simple admin using CLI', () => {
       stdout: /succesfully created/,
     })
     await expect(
-      provider.connection.getAccountInfo(rootKeypair.publicKey)
+      provider.connection.getAccountInfo(addressKeypair.publicKey)
     ).resolves.toBeNull()
   })
 })

@@ -1,9 +1,6 @@
 import { ProgramAccount } from '@coral-xyz/anchor'
 import { PublicKey } from '@solana/web3.js'
-import {
-  SimpleAccount,
-  SimpleAdminSdk,
-} from './sdk'
+import { SimpleAccount, SimpleAdminSdk } from './sdk'
 
 export async function simpleAccount({
   sdk,
