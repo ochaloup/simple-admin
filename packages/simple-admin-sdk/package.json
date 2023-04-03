@@ -30,9 +30,7 @@
     "@saberhq/solana-contrib": "^1.14.11",
     "@saberhq/token-utils": "^1.14.11",
     "@solana/web3.js": "^1.74.0",
-    "@types/expand-tilde": "^2.0.0",
     "bn.js": "^5.2.1",
-    "expand-tilde": "^2.0.2",
     "jsbi": "^4.3.0"
   },
   "peerDependencies": {

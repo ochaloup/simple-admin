@@ -5,30 +5,27 @@ import {
 } from '@solana/web3.js'
 import { SimpleAdminSdk } from './sdk'
 
-/**
- * Generating an instruction to create a new root account
- * of simple admin contract.
- *
- * Instruction requires signature of root and rentPayer.
- */
-export async function withCreateRoot(
+export async function withCreateSimpleAccount(
   instructions: TransactionInstruction[],
   {
     sdk,
-    root,
+    address,
+    admin,
     rentPayer,
   }: {
     sdk: SimpleAdminSdk
-    root: PublicKey
+    address: PublicKey
+    admin?: PublicKey
     rentPayer?: PublicKey
   }
 ) {
+  admin = (admin || sdk.program.provider.publicKey)!
   rentPayer = (rentPayer || sdk.program.provider.publicKey)!
 
   const ix = await sdk.program.methods
-    .createRoot()
+    .createSimpleAccount({admin})
     .accountsStrict({
-      root,
+      simpleAccount: address,
       rentPayer,
       systemProgram: SystemProgram.programId,
     })

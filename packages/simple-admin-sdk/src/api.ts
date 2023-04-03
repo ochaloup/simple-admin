@@ -1,66 +1,35 @@
 import { ProgramAccount } from '@coral-xyz/anchor'
 import { PublicKey } from '@solana/web3.js'
 import {
-  SimpleAdminRoot,
+  SimpleAccount,
   SimpleAdminSdk,
-  SimpleAdminVoteRecord,
 } from './sdk'
 
-export async function voteRecord({
+export async function simpleAccount({
   sdk,
   address,
 }: {
   sdk: SimpleAdminSdk
   address: PublicKey
-}): Promise<SimpleAdminVoteRecord> {
-  return sdk.program.account.voteRecord.fetch(address)
+}): Promise<SimpleAccount> {
+  return sdk.program.account.simpleAccount.fetch(address)
 }
 
-export async function root({
+export async function findSimpleAccounts({
   sdk,
-  address,
+  admin,
 }: {
   sdk: SimpleAdminSdk
-  address: PublicKey
-}): Promise<SimpleAdminRoot> {
-  return sdk.program.account.root.fetch(address)
-}
-
-export async function findVoteRecords({
-  sdk,
-  root,
-  owner,
-  validatorVote,
-}: {
-  sdk: SimpleAdminSdk
-  root?: PublicKey
-  owner?: PublicKey
-  validatorVote?: PublicKey
-}): Promise<ProgramAccount<SimpleAdminVoteRecord>[]> {
+  admin?: PublicKey
+}): Promise<ProgramAccount<SimpleAccount>[]> {
   const filters = []
-  if (root) {
+  if (admin) {
     filters.push({
       memcmp: {
-        bytes: root.toBase58(),
+        bytes: admin.toBase58(),
         offset: 8,
       },
     })
   }
-  if (owner) {
-    filters.push({
-      memcmp: {
-        bytes: owner.toBase58(),
-        offset: 40,
-      },
-    })
-  }
-  if (validatorVote) {
-    filters.push({
-      memcmp: {
-        bytes: validatorVote.toBase58(),
-        offset: 72,
-      },
-    })
-  }
-  return await sdk.program.account.voteRecord.all(filters)
+  return await sdk.program.account.simpleAccount.all(filters)
 }

@@ -35,7 +35,7 @@ export type SimpleAdmin = {
       "accounts": [
         {
           "name": "simpleAdminAccount",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -171,7 +171,7 @@ export const IDL: SimpleAdmin = {
       "accounts": [
         {
           "name": "simpleAdminAccount",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {

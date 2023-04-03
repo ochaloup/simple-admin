@@ -10,43 +10,21 @@ import {
 import { ConfirmOptions, Connection, Keypair, PublicKey } from '@solana/web3.js'
 import NodeWallet from '@coral-xyz/anchor/dist/cjs/nodewallet'
 
-/**
- * simple admin contract SDK.
- *
- * Start by creating a new instance of the SimpleAdminSdk class.
- * It's required parameter for all operations.
- *
- * To get account addresses see ./accounts.ts
- * To read account data see ./api.ts
- * To execute particular contract operations see ./with*.ts
- */
-
-const DirecteStakeIDL = generated.IDL
+const SimpleAdminIDL = generated.IDL
 type SimpleAdminProgram = AnchorProgram<generated.SimpleAdmin>
 
 export type SimpleAdmin = generated.SimpleAdmin
-export type SimpleAdminRoot = IdlAccounts<generated.SimpleAdmin>['root']
-export type SimpleAdminVoteRecord =
-  IdlAccounts<generated.SimpleAdmin>['voteRecord']
+export type SimpleAccount = IdlAccounts<generated.SimpleAdmin>['simpleAccount']
 
 export const DEFAULT_SIMPLE_ADMIN_PROGRAM_ID =
-  'dstK1PDHNoKN9MdmftRzsEbXP5T1FTBiQBm1Ee3meVd'
-export const DEFAULT_SIMPLE_ADMIN_ROOT =
-  'DrooToPS3MLqgZwBiK2fkAPUTUgKNV3CGb2NqFRAL4Zf'
-export const SIMPLE_ADMIN_SEED = 'stake-direction'
+  'sagP7gnuzqDuGH2NsUkzpeLWkUJLgeuwb1drHtho6op'
 
-export const CREATE_ROOT_EVENT = 'CreateRootEvent'
-export type CreateRootEvent =
-  IdlEvents<generated.SimpleAdmin>[typeof CREATE_ROOT_EVENT]
-export const CREATE_VOTE_RECORD_EVENT = 'CreateVoteRecordEvent'
-export type CreateVoteRecordEvent =
-  IdlEvents<generated.SimpleAdmin>[typeof CREATE_VOTE_RECORD_EVENT]
-export const REMOVE_VOTE_RECORD_EVENT = 'RemoveVoteRecordEvent'
-export type RemoveVoteRecordEvent =
-  IdlEvents<generated.SimpleAdmin>[typeof REMOVE_VOTE_RECORD_EVENT]
-export const UPDATE_VOTE_RECORD_EVENT = 'UpdateVoteRecordEvent'
-export type UpdateVoteRecordEvent =
-  IdlEvents<generated.SimpleAdmin>[typeof UPDATE_VOTE_RECORD_EVENT]
+export const CREATE_SIMPLE_ACCOUNT_EVENT = 'CreateSimpleAccountEvent'
+export type CreateSimpleAccountEvent =
+  IdlEvents<generated.SimpleAdmin>[typeof CREATE_SIMPLE_ACCOUNT_EVENT]
+export const PRINT_ADMIN_EVENT = 'PrintAdminEvent'
+export type PrintAdminEvent =
+  IdlEvents<generated.SimpleAdmin>[typeof PRINT_ADMIN_EVENT]
 
 export type Wallet = AnchorWallet
 
@@ -81,6 +59,6 @@ export class SimpleAdminSdk {
       wallet = new NodeWallet(wallet)
     }
     const provider = new AnchorProvider(connection, wallet, opts)
-    return new Program<SimpleAdmin>(DirecteStakeIDL, programId, provider)
+    return new Program<SimpleAdmin>(SimpleAdminIDL, programId, provider)
   }
 }

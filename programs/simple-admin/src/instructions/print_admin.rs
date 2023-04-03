@@ -5,7 +5,7 @@ use crate::state::simple_account::SimpleAccount;
 
 #[derive(Accounts)]
 pub struct PrintAdmin<'info> {
-    #[account(has_one = admin @ SimpleAdminError::InvalidAdmin)]
+    #[account(mut, has_one = admin @ SimpleAdminError::InvalidAdmin)]
     pub simple_admin_account: Account<'info, SimpleAccount>,
 
     pub admin: Signer<'info>,
@@ -25,6 +25,8 @@ impl<'info> PrintAdmin<'info> {
           message,
           admin: self.admin.key()
         });
+
+        self.simple_admin_account.print_call_count += 1;
 
         Ok(())
     }
