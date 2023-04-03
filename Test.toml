@@ -1,0 +1,3 @@
+[scripts]
+# recursive call: pnpm test -> anchor test -> pnpm _test
+test = "pnpm _test"

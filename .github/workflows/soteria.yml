@@ -1,0 +1,24 @@
+name: Soteria Audit
+
+on:
+  # push:
+  #   branches: [ main ]
+  #   paths:
+  #     - programs/**
+#  pull_request:
+#     branches: [ main ]
+#     paths:
+#       - programs/**
+
+jobs:
+  soteria-security-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check-out the repository
+        uses: actions/checkout@v2
+      - name: Soteria Audit
+        continue-on-error: false
+        uses: silas-x/soteria-action@main
+        with:
+          solana-version: "1.14.11"

@@ -1,0 +1,22 @@
+[workspace]
+types = "packages/simple-admin-sdk/generated/"
+
+[features]
+seeds = false
+skip-lint = false
+
+[programs.mainnet]
+simple_admin = "sagP7gnuzqDuGH2NsUkzpeLWkUJLgeuwb1drHtho6op"
+
+[programs.devnet]
+simple_admin = "sagP7gnuzqDuGH2NsUkzpeLWkUJLgeuwb1drHtho6op"
+
+[programs.localnet]
+simple_admin = "sagP7gnuzqDuGH2NsUkzpeLWkUJLgeuwb1drHtho6op"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
