@@ -14,6 +14,7 @@ import {
   DEFAULT_SIMPLE_ADMIN_PROGRAM_ID,
   SimpleAdminSdk,
   simpleAccount,
+  withCreateSimpleAccount,
 } from 'simple-admin-sdk'
 import NodeWallet from '@coral-xyz/anchor/dist/cjs/nodewallet'
 
@@ -158,5 +159,47 @@ describe('Create simple admin account using CLI', () => {
     await expect(
       provider.connection.getAccountInfo(addressKeypair.publicKey)
     ).resolves.toBeNull()
+  })
+
+  it.only('do print a message', async () => {
+    const tx = new TransactionEnvelope(provider, [], [addressKeypair])
+    await withCreateSimpleAccount(tx.instructions, {
+      sdk,
+      address: addressKeypair.publicKey,
+      admin: adminKeypair.publicKey,
+    })
+    await tx.confirm()
+
+    await (
+      expect([
+        'pnpm',
+        [
+          'cli',
+          '-c',
+          provider.connection.rpcEndpoint,
+          '--program-id',
+          sdk.program.programId.toBase58(),
+          'print-admin',
+          addressKeypair.publicKey.toBase58(),
+          '--adminn',
+          adminPath,
+          '--message',
+          'hello world',
+        ],
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ]) as any
+    ).toHaveMatchingSpawnOutput({
+      code: 0,
+      stderr: '',
+      stdout: /succesfully printed/,
+    })
+    await expect(
+      simpleAccount({
+        sdk,
+        address: addressKeypair.publicKey,
+      })
+    ).resolves.toStrictEqual({
+      admin: adminKeypair.publicKey,
+    })
   })
 })
