@@ -21,15 +21,16 @@ export function installPrintAdmin(program: Command) {
     )
     .requiredOption('--message <string>', 'Message to print')
     .action(
-      async ({
-        address,
-        admin,
-        message,
-      }: {
-        address: Promise<PublicKey>
-        admin: Promise<PublicKey | Keypair>
-        message: string
-      }) => {
+      async (
+        address: Promise<PublicKey>,
+        {
+          admin,
+          message,
+        }: {
+          admin: Promise<PublicKey | Keypair>
+          message: string
+        }
+      ) => {
         await managePrintAdmin({
           address: await address,
           admin: await admin,

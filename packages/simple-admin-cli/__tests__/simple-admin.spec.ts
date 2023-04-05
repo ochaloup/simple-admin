@@ -161,7 +161,7 @@ describe('Create simple admin account using CLI', () => {
     ).resolves.toBeNull()
   })
 
-  it.only('do print a message', async () => {
+  it('do print a message', async () => {
     const tx = new TransactionEnvelope(provider, [], [addressKeypair])
     await withCreateSimpleAccount(tx.instructions, {
       sdk,
@@ -181,7 +181,7 @@ describe('Create simple admin account using CLI', () => {
           sdk.program.programId.toBase58(),
           'print-admin',
           addressKeypair.publicKey.toBase58(),
-          '--adminn',
+          '--admin',
           adminPath,
           '--message',
           'hello world',
@@ -193,13 +193,10 @@ describe('Create simple admin account using CLI', () => {
       stderr: '',
       stdout: /succesfully printed/,
     })
-    await expect(
-      simpleAccount({
-        sdk,
-        address: addressKeypair.publicKey,
-      })
-    ).resolves.toStrictEqual({
-      admin: adminKeypair.publicKey,
+    const data = await simpleAccount({
+      sdk,
+      address: addressKeypair.publicKey,
     })
+    expect(data.printCallCount.toNumber()).toStrictEqual(1)
   })
 })
