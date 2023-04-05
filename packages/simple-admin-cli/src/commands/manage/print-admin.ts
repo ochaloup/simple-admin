@@ -50,7 +50,7 @@ async function managePrintAdmin({
   message: string
 }) {
   const { sdk, provider, logger } = useContext()
-  console.log('admin', admin)
+
   const adminAddress = admin instanceof PublicKey ? admin : admin.publicKey
 
   const tx = new TransactionEnvelope(provider, [], [])
