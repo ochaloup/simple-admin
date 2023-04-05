@@ -1,10 +1,10 @@
 {
-  "name": "@marinade.finance/simple-admin-sdk",
+  "name": "simple-admin-sdk",
   "version": "0.0.1",
   "description": "SDK of the simple admin contract",
   "repository": {
     "type": "git",
-    "url": "git@github.com:marinade-finance/simple-admin.git"
+    "url": "git@github.com:ochaloup/simple-admin.git"
   },
   "publishConfig": {
     "access": "public"
@@ -14,11 +14,9 @@
   },
   "keywords": [
     "solana",
-    "marinade.finance",
-    "liquid staking",
-    "msol"
+    "test"
   ],
-  "author": "Marinade Finance",
+  "author": "chalda",
   "license": "ISC",
   "main": "src/index",
   "files": [

@@ -14,7 +14,7 @@ import {
   DEFAULT_SIMPLE_ADMIN_PROGRAM_ID,
   SimpleAdminSdk,
   simpleAccount,
-} from '@marinade.finance/simple-admin-sdk'
+} from 'simple-admin-sdk'
 import NodeWallet from '@coral-xyz/anchor/dist/cjs/nodewallet'
 
 beforeAll(() => {
@@ -143,9 +143,9 @@ describe('Create simple admin account using CLI', () => {
           provider.connection.rpcEndpoint,
           '--program-id',
           sdk.program.programId.toBase58(),
-          'create-root',
+          'create-simple-account',
           '--address',
-          addressKeypair,
+          addressPath,
           '--print-only',
         ],
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

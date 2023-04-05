@@ -13,7 +13,10 @@ declare_id!("sagP7gnuzqDuGH2NsUkzpeLWkUJLgeuwb1drHtho6op");
 pub mod simple_admin {
     use super::*;
 
-    pub fn create_simple_account(ctx: Context<CreateSimpleAccount>, params: CreateSimpleAccountParams) -> Result<()> {
+    pub fn create_simple_account(
+        ctx: Context<CreateSimpleAccount>,
+        params: CreateSimpleAccountParams,
+    ) -> Result<()> {
         ctx.accounts.process(params)
     }
 

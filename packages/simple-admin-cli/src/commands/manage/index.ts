@@ -1,6 +1,6 @@
 import { Command } from 'commander'
-import { installCreateRoot } from './create-account'
+import { installCreateSimpleAccount } from './create-simple-account'
 
 export function installManage(program: Command) {
-  installCreateRoot(program)
+  installCreateSimpleAccount(program)
 }

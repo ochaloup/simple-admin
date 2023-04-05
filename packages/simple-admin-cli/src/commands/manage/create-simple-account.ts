@@ -6,11 +6,11 @@ import {
 import { Keypair, PublicKey } from '@solana/web3.js'
 import { Command } from 'commander'
 import { useContext } from '../../context'
-import { withCreateSimpleAccount } from '@marinade.finance/simple-admin-sdk'
+import { withCreateSimpleAccount } from 'simple-admin-sdk'
 import { executeTx } from '../utils'
 import { TransactionEnvelope } from '@saberhq/solana-contrib'
 
-export function installCreateRoot(program: Command) {
+export function installCreateSimpleAccount(program: Command) {
   program
     .command('create-simple-account')
     .description('Create a new account.')

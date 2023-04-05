@@ -1,10 +1,10 @@
 {
-  "name": "@marinade.finance/simple-admin-cli",
+  "name": "simple-admin-cli",
   "version": "0.0.1",
   "description": "CLI of the simple admin",
   "repository": {
     "type": "git",
-    "url": "git@github.com:marinade-finance/simple-admin.git"
+    "url": "git@github.com:ochaloup/simple-admin.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,7 +18,7 @@
   "main": "src/index",
   "dependencies": {
     "@gokiprotocol/client": "^0.11.1",
-    "@marinade.finance/simple-admin-sdk": "workspace:*",
+    "simple-admin-sdk": "workspace:*",
     "@marinade.finance/kedgeree-sdk": "^1.0.3",
     "@marinade.finance/marinade-ts-sdk": "^4.0.4",
     "@marinade.finance/solana-cli-utils": "^0.0.65",

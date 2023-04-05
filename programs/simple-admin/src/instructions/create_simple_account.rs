@@ -27,14 +27,16 @@ pub struct CreateSimpleAccountParams {
 }
 
 impl<'info> CreateSimpleAccount<'info> {
-    pub fn process(&mut self, CreateSimpleAccountParams {
-        admin,
-    }: CreateSimpleAccountParams) -> Result<()> {
-        self.simple_account.set_inner(SimpleAccount { admin, print_call_count: 0 });
-
-        emit!(CreateSimpleAccountEvent {
+    pub fn process(
+        &mut self,
+        CreateSimpleAccountParams { admin }: CreateSimpleAccountParams,
+    ) -> Result<()> {
+        self.simple_account.set_inner(SimpleAccount {
             admin,
+            print_call_count: 0,
         });
+
+        emit!(CreateSimpleAccountEvent { admin });
         Ok(())
     }
 }

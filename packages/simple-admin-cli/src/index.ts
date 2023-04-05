@@ -5,7 +5,7 @@ import { Keypair } from '@solana/web3.js'
 import { setContext } from './context'
 import { installCommands } from './commands'
 import { pino, Logger } from 'pino'
-import { DEFAULT_SIMPLE_ADMIN_PROGRAM_ID } from '@marinade.finance/simple-admin-sdk'
+import { DEFAULT_SIMPLE_ADMIN_PROGRAM_ID } from 'simple-admin-sdk'
 
 const pinoAdditionalOptions = process.env.NODE_ENV?.startsWith('prod')
   ? {
