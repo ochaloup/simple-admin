@@ -4,4 +4,5 @@ import { installShow } from './show'
 
 export function installCommands(program: Command) {
   installManage(program)
+  installShow(program)
 }
