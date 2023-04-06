@@ -1,6 +1,4 @@
-import {
-  parsePubkeyOrKeypair,
-} from '@marinade.finance/solana-cli-utils'
+import { parsePubkeyOrKeypair } from '@marinade.finance/solana-cli-utils'
 import { Keypair, PublicKey } from '@solana/web3.js'
 import { Command } from 'commander'
 import { useContext } from '../../context'
