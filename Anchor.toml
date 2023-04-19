@@ -6,13 +6,13 @@ seeds = false
 skip-lint = false
 
 [programs.mainnet]
-simple_admin = "sa2LFTHaNfhHz2ES5oNFoGcLRC6E3cFr5KX4YGFANwv"
+simple_admin = "sa3HiPEaDZk5JyU1CCmmRbcWnBc9U4TzHq42RWVUNQS"
 
 [programs.devnet]
-simple_admin = "sa2LFTHaNfhHz2ES5oNFoGcLRC6E3cFr5KX4YGFANwv"
+simple_admin = "sa3HiPEaDZk5JyU1CCmmRbcWnBc9U4TzHq42RWVUNQS"
 
 [programs.localnet]
-simple_admin = "sa2LFTHaNfhHz2ES5oNFoGcLRC6E3cFr5KX4YGFANwv"
+simple_admin = "sa3HiPEaDZk5JyU1CCmmRbcWnBc9U4TzHq42RWVUNQS"
 
 [registry]
 url = "https://api.apr.dev"
