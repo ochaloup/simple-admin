@@ -7,7 +7,7 @@ pub mod state;
 
 use instructions::*;
 
-declare_id!("sagP7gnuzqDuGH2NsUkzpeLWkUJLgeuwb1drHtho6op");
+declare_id!("sa2LFTHaNfhHz2ES5oNFoGcLRC6E3cFr5KX4YGFANwv");
 
 #[program]
 pub mod simple_admin {
