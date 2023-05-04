@@ -1,6 +1,13 @@
 export type SimpleAdmin = {
   "version": "0.1.0",
   "name": "simple_admin",
+  "constants": [
+    {
+      "name": "PROGRAM_ID",
+      "type": "string",
+      "value": "\"sa3HiPEaDZk5JyU1CCmmRbcWnBc9U4TzHq42RWVUNQS\""
+    }
+  ],
   "instructions": [
     {
       "name": "createSimpleAccount",
@@ -137,6 +144,13 @@ export type SimpleAdmin = {
 export const IDL: SimpleAdmin = {
   "version": "0.1.0",
   "name": "simple_admin",
+  "constants": [
+    {
+      "name": "PROGRAM_ID",
+      "type": "string",
+      "value": "\"sa3HiPEaDZk5JyU1CCmmRbcWnBc9U4TzHq42RWVUNQS\""
+    }
+  ],
   "instructions": [
     {
       "name": "createSimpleAccount",

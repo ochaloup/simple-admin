@@ -16,8 +16,9 @@ type SimpleAdminProgram = AnchorProgram<generated.SimpleAdmin>
 export type SimpleAdmin = generated.SimpleAdmin
 export type SimpleAccount = IdlAccounts<generated.SimpleAdmin>['simpleAccount']
 
-export const DEFAULT_SIMPLE_ADMIN_PROGRAM_ID =
-  'sagP7gnuzqDuGH2NsUkzpeLWkUJLgeuwb1drHtho6op'
+export const DEFAULT_SIMPLE_ADMIN_PROGRAM_ID = JSON.parse(
+  SimpleAdminIDL.constants.find(x => x.name === 'PROGRAM_ID')!.value
+)
 
 export const CREATE_SIMPLE_ACCOUNT_EVENT = 'CreateSimpleAccountEvent'
 export type CreateSimpleAccountEvent =
