@@ -14,7 +14,7 @@ export function installShow(program: Command) {
   program
     .command('show')
     .description('Show account data content.')
-    .option('--address <pubkey>', 'Address of simple account', parsePubkey)
+    .option('-a, --address <pubkey>', 'Address of simple account', parsePubkey)
     .action(async (address?: Promise<PublicKey>) => {
       await manageShow({
         address: await address,
@@ -26,7 +26,6 @@ async function manageShow({ address }: { address?: PublicKey }) {
   const { sdk } = useContext()
 
   let data: (SimpleAccount & { publicKey: PublicKey })[] = []
-  console.log(address)
   if (address instanceof PublicKey) {
     const simpleAccountData = await simpleAccount({
       sdk,
