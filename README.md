@@ -10,6 +10,9 @@ pnpm cli -c devnet print-admin <acccount pubkey> --admin <path keypair> --messag
 
 # to get base58 string for SPL Gov
 pnpm cli -c devnet print-admin <acccount pubkey> --admin <path keypair> --message 'some message' --print-only
+
+# to get info about accounts
+pnpm cli -c devnet show
 ```
 
 ## Development
