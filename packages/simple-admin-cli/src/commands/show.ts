@@ -25,13 +25,16 @@ export function installShow(program: Command) {
 async function manageShow({ address }: { address?: PublicKey }) {
   const { sdk } = useContext()
 
-  let data: SimpleAccount | (SimpleAccount & { publicKey: PublicKey })[]
+  let data: (SimpleAccount & { publicKey: PublicKey })[] = []
   console.log(address)
   if (address instanceof PublicKey) {
-    data = await simpleAccount({
+    const simpleAccountData = await simpleAccount({
       sdk,
       address,
     })
+    if (simpleAccountData) {
+      data = [{ publicKey: address, ...simpleAccountData }]
+    }
   } else {
     const programData: ProgramAccount<SimpleAccount>[] =
       await findSimpleAccounts({ sdk })

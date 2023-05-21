@@ -8,8 +8,8 @@ export async function simpleAccount({
 }: {
   sdk: SimpleAdminSdk
   address: PublicKey
-}): Promise<SimpleAccount> {
-  return sdk.program.account.simpleAccount.fetch(address)
+}): Promise<SimpleAccount|null> {
+  return sdk.program.account.simpleAccount.fetchNullable(address)
 }
 
 export async function findSimpleAccounts({

@@ -11,7 +11,7 @@ export async function withPrintAdmin(
   }: {
     sdk: SimpleAdminSdk
     address: PublicKey
-    admin: PublicKey
+    admin?: PublicKey
     message: string
   }
 ) {

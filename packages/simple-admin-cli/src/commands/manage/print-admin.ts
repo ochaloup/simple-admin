@@ -14,9 +14,9 @@ export function installPrintAdmin(program: Command) {
     .command('print-admin')
     .description('Print a message when you are an admin.')
     .argument('address', 'Address of simple account ', parsePubkeyOrKeypair)
-    .requiredOption(
+    .option(
       '--admin <keypair_or_pubkey>',
-      'Admin of the account that provides the permission to print',
+      'Admin of the account that provides the permission to print (default: wallet)',
       parsePubkeyOrKeypair
     )
     .requiredOption('--message <string>', 'Message to print')
@@ -27,7 +27,7 @@ export function installPrintAdmin(program: Command) {
           admin,
           message,
         }: {
-          admin: Promise<PublicKey | Keypair>
+          admin?: Promise<PublicKey | Keypair>
           message: string
         }
       ) => {
@@ -46,15 +46,20 @@ async function managePrintAdmin({
   message,
 }: {
   address: PublicKey | Keypair
-  admin: PublicKey | Keypair
+  admin?: PublicKey | Keypair
   message: string
 }) {
   const { sdk, provider, logger } = useContext()
 
   address = address instanceof PublicKey ? address : address.publicKey
-  const adminAddress = admin instanceof PublicKey ? admin : admin.publicKey
+  const adminAddress = admin instanceof Keypair ? admin.publicKey
+    // when not set using wallet pubkey
+    : (admin || sdk.program.provider.publicKey)!
 
   const simpleAccountData = await simpleAccount({ sdk, address })
+  if (!simpleAccountData) {
+    throw new Error(`No simple account found at ${address.toBase58()}`)
+  }
   if (!simpleAccountData.admin.equals(adminAddress)) {
     throw new Error(
       `Admin ${adminAddress.toBase58()} is not an admin of simple account ${address.toBase58()} ` +
