@@ -52,9 +52,11 @@ async function managePrintAdmin({
   const { sdk, provider, logger } = useContext()
 
   address = address instanceof PublicKey ? address : address.publicKey
-  const adminAddress = admin instanceof Keypair ? admin.publicKey
-    // when not set using wallet pubkey
-    : (admin || sdk.program.provider.publicKey)!
+  const adminAddress =
+    admin instanceof Keypair
+      ? admin.publicKey
+      : // when not set using wallet pubkey
+        (admin || sdk.program.provider.publicKey)!
 
   const simpleAccountData = await simpleAccount({ sdk, address })
   if (!simpleAccountData) {

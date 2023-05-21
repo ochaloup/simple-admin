@@ -41,7 +41,7 @@ async function manageShow({ address }: { address?: PublicKey }) {
       return { publicKey, ...account }
     })
   }
-  console.log(reformat({programId: sdk.program.programId, data}))
+  console.log(reformat({ programId: sdk.program.programId, data }))
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

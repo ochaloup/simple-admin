@@ -17,6 +17,7 @@ import {
   withCreateSimpleAccount,
 } from 'simple-admin-sdk'
 import NodeWallet from '@coral-xyz/anchor/dist/cjs/nodewallet'
+import assert from 'assert'
 
 beforeAll(() => {
   shellMatchers()
@@ -118,6 +119,9 @@ describe('Create simple admin account using CLI', () => {
       sdk,
       address: addressKeypair.publicKey,
     })
+    expect(rootData).not.toBeNull()
+    assert(rootData !== null)
+
     expect(rootData.admin.toBase58()).toStrictEqual(
       adminKeypair.publicKey.toBase58()
     )
@@ -197,6 +201,8 @@ describe('Create simple admin account using CLI', () => {
       sdk,
       address: addressKeypair.publicKey,
     })
+    expect(data).not.toBeNull()
+    assert(data !== null)
     expect(data.printCallCount.toNumber()).toStrictEqual(1)
   })
 })

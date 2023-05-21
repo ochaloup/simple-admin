@@ -10,6 +10,7 @@ import {
 } from '../src'
 import { executeTx, initTest } from './test-utils'
 import { Keypair } from '@solana/web3.js'
+import assert from 'assert'
 
 describe('Create simple admin account', () => {
   const { sdk, solanaProvider } = initTest()
@@ -48,6 +49,8 @@ describe('Create simple admin account', () => {
       sdk,
       address: simpleAccountKeypair.publicKey,
     })
+    expect(data).not.toBeNull()
+    assert(data !== null)
 
     // Ensure it has the right data.
     expect(data.admin.toBase58()).toStrictEqual(admin.publicKey.toBase58())
@@ -100,6 +103,8 @@ describe('Create simple admin account', () => {
       sdk,
       address: simpleAccountKeypair.publicKey,
     })
+    expect(data).not.toBeNull()
+    assert(data !== null)
 
     // Ensure it has the right data.
     expect(data.admin.toBase58()).toStrictEqual(admin.publicKey.toBase58())

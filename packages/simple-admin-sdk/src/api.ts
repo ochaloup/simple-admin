@@ -8,7 +8,7 @@ export async function simpleAccount({
 }: {
   sdk: SimpleAdminSdk
   address: PublicKey
-}): Promise<SimpleAccount|null> {
+}): Promise<SimpleAccount | null> {
   return sdk.program.account.simpleAccount.fetchNullable(address)
 }
 
