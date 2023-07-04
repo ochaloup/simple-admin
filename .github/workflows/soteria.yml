@@ -1,14 +1,14 @@
 name: Soteria Audit
 
 on:
-  # push:
-  #   branches: [ main ]
-  #   paths:
-  #     - programs/**
-#  pull_request:
-#     branches: [ main ]
-#     paths:
-#       - programs/**
+  push:
+    branches: [ v2 ]
+    paths:
+      - programs/**
+ pull_request:
+    branches: [ v2 ]
+    paths:
+      - programs/**
 
 jobs:
   soteria-security-audit:

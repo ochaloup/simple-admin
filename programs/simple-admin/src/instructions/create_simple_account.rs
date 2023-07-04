@@ -28,8 +28,9 @@ pub struct CreateSimpleAccountParams {
 
 /**
  * Instruction to create a SimpleAccount.
- * The admin key is stored in the SimpleAccount.
- * Whoever may call this instruction and such be the admin of that particular SimpleAccount.
+ * It's an administrative account that stores admin pubkey that's the only one permitted
+ * to use the `print_message` instruction.
+ * Whoever may call this instruction and such be the admin of a new SimpleAccount.
  */
 impl<'info> CreateSimpleAccount<'info> {
     pub fn process(
@@ -39,6 +40,7 @@ impl<'info> CreateSimpleAccount<'info> {
         self.simple_account.set_inner(SimpleAccount {
             admin,
             print_call_count: 0,
+            created_account_next_index: 0,
         });
 
         emit!(CreateSimpleAccountEvent { admin });

@@ -24,7 +24,7 @@
     "generated"
   ],
   "devDependencies": {
-    "@coral-xyz/anchor": "^0.27.0",
+    "@coral-xyz/anchor": "^0.28.0",
     "@saberhq/solana-contrib": "^1.14.11",
     "@saberhq/token-utils": "^1.14.11",
     "@solana/web3.js": "^1.74.0",
@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "bs58": "^5.0.0",
-    "@coral-xyz/anchor": "^0.27.0"
+    "@coral-xyz/anchor": "^0.28.0"
   },
   "engines": {
     "node": ">10"

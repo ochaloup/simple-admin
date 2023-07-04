@@ -6,7 +6,10 @@ pub struct CreateSimpleAccountEvent {
 }
 
 #[event]
-pub struct PrintAdminEvent {
+pub struct PrintMessageEvent {
     pub admin: Pubkey,
     pub message: String,
+    pub print_account: Pubkey,
+    pub print_call_count: u64,
+    pub created_account_next_index: u32,
 }

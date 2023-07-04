@@ -1,6 +1,6 @@
 import { ProgramAccount } from '@coral-xyz/anchor'
 import { PublicKey } from '@solana/web3.js'
-import { SimpleAccount, SimpleAdminSdk } from './sdk'
+import { PrintAccount, SimpleAccount, SimpleAdminSdk } from './sdk'
 
 export async function simpleAccount({
   sdk,
@@ -29,4 +29,21 @@ export async function findSimpleAccounts({
     })
   }
   return await sdk.program.account.simpleAccount.all(filters)
+}
+
+export async function findPrintAccounts({
+  sdk,
+  simpleAccountAddress,
+}: {
+  sdk: SimpleAdminSdk
+  simpleAccountAddress: PublicKey
+}): Promise<ProgramAccount<PrintAccount>[]> {
+  const filters = []
+  filters.push({
+    memcmp: {
+      bytes: simpleAccountAddress.toBase58(),
+      offset: 8,
+    },
+  })
+  return await sdk.program.account.printAccount.all(filters)
 }

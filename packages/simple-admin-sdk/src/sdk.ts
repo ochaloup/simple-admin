@@ -15,17 +15,22 @@ type SimpleAdminProgram = AnchorProgram<generated.SimpleAdmin>
 
 export type SimpleAdmin = generated.SimpleAdmin
 export type SimpleAccount = IdlAccounts<generated.SimpleAdmin>['simpleAccount']
+export type PrintAccount = IdlAccounts<generated.SimpleAdmin>['printAccount']
 
 export const DEFAULT_SIMPLE_ADMIN_PROGRAM_ID = JSON.parse(
   SimpleAdminIDL.constants.find(x => x.name === 'PROGRAM_ID')!.value
+)
+export const PRINT_MESSAGE_ACCOUNT_SEED = JSON.parse(
+  SimpleAdminIDL.constants.find(x => x.name === 'PRINT_MESSAGE_ACCOUNT_SEED')!
+    .value
 )
 
 export const CREATE_SIMPLE_ACCOUNT_EVENT = 'CreateSimpleAccountEvent'
 export type CreateSimpleAccountEvent =
   IdlEvents<generated.SimpleAdmin>[typeof CREATE_SIMPLE_ACCOUNT_EVENT]
-export const PRINT_ADMIN_EVENT = 'PrintAdminEvent'
-export type PrintAdminEvent =
-  IdlEvents<generated.SimpleAdmin>[typeof PRINT_ADMIN_EVENT]
+export const PRINT_MESSAGE_EVENT = 'PrintMessageEvent'
+export type PrintMessageEvent =
+  IdlEvents<generated.SimpleAdmin>[typeof PRINT_MESSAGE_EVENT]
 
 export type Wallet = AnchorWallet
 

@@ -1,12 +1,11 @@
 {
     "license": "ISC",
     "scripts": {
-        "select-anchor-version": "avm use 0.27.0",
-        "anchor-build": "pnpm select-anchor-version && anchor build",
+        "anchor-build": "anchor build",
         "compile": "pnpm anchor-build && tsc --project tsconfig.build.json",
         "build": "pnpm compile",
         "_test": "pnpm jest \"$FILE\"",
-        "anchor-test": "pnpm select-anchor-version && BROWSER= anchor test",
+        "anchor-test": "BROWSER= anchor test",
         "pretest": "pnpm compile",
         "posttest": "pnpm lint",
         "test": "cargo test && pnpm anchor-test",
@@ -37,7 +36,7 @@
             ],
             "allowedVersions": {
                 "jest": "29",
-                "@project-serum/anchor": "0.27"
+                "@coral-xyz/anchor": "0.28"
             }
         }
     }

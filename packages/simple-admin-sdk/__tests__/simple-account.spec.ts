@@ -2,11 +2,13 @@ import { TransactionEnvelope } from '@saberhq/solana-contrib'
 import {
   CREATE_SIMPLE_ACCOUNT_EVENT,
   CreateSimpleAccountEvent,
-  PRINT_ADMIN_EVENT,
-  PrintAdminEvent,
+  PRINT_MESSAGE_EVENT,
+  PrintMessageEvent,
+  findPrintAccounts,
+  findSimpleAccounts,
   simpleAccount,
   withCreateSimpleAccount,
-  withPrintAdmin,
+  withPrintMessage,
 } from '../src'
 import { executeTx, initTest } from './test-utils'
 import { Keypair } from '@solana/web3.js'
@@ -63,14 +65,21 @@ describe('Create simple admin account', () => {
     await expect(event).resolves.toStrictEqual({
       admin: admin.publicKey,
     })
+
+    // Check the simple admin account is searchable with filter of admin
+    const simpleAdminAccounts = await findSimpleAccounts({
+      sdk,
+      admin: admin.publicKey,
+    })
+    expect(simpleAdminAccounts.length).toStrictEqual(1)
   })
 
   it('can print when admin', async () => {
     const simpleAccountKeypair = Keypair.generate()
 
-    const event = new Promise<PrintAdminEvent>(resolve => {
+    const event = new Promise<PrintMessageEvent>(resolve => {
       const listener = sdk.program.addEventListener(
-        PRINT_ADMIN_EVENT,
+        PRINT_MESSAGE_EVENT,
         async event => {
           await sdk.program.removeEventListener(listener)
           resolve(event)
@@ -90,7 +99,7 @@ describe('Create simple admin account', () => {
       address: simpleAccountKeypair.publicKey,
       admin: admin.publicKey,
     })
-    await withPrintAdmin(tx.instructions, {
+    const printAccountAddress = await withPrintMessage(tx.instructions, {
       sdk,
       address: simpleAccountKeypair.publicKey,
       admin: admin.publicKey,
@@ -109,10 +118,22 @@ describe('Create simple admin account', () => {
     // Ensure it has the right data.
     expect(data.admin.toBase58()).toStrictEqual(admin.publicKey.toBase58())
     expect(data.printCallCount.toNumber()).toStrictEqual(1)
+    expect(data.createdAccountNextIndex).toStrictEqual(1)
     // Ensure the event listener was called
-    await expect(event).resolves.toStrictEqual({
+    await expect(event).resolves.toMatchObject({
       admin: admin.publicKey,
       message,
+      printAccount: printAccountAddress,
+      // printCallCount: new BN(1),
+      createdAccountNextIndex: 1,
     })
+
+    // Check the print account is searchable with filter on simple account address
+    const printAccountsData = await findPrintAccounts({
+      sdk,
+      simpleAccountAddress: simpleAccountKeypair.publicKey,
+    })
+    expect(printAccountsData.length).toStrictEqual(1)
+    expect(printAccountsData[0].account.message).toStrictEqual(message)
   })
 })

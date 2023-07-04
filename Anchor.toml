@@ -1,4 +1,4 @@
-anchor_version = "0.27.0"
+anchor_version = "0.28.0"
 
 [workspace]
 types = "packages/simple-admin-sdk/generated/"
@@ -8,13 +8,13 @@ seeds = false
 skip-lint = false
 
 [programs.mainnet]
-simple_admin = "sa3HiPEaDZk5JyU1CCmmRbcWnBc9U4TzHq42RWVUNQS"
+simple_admin = "sa4ihCaRZKuYZtY4fcdnNqx9vx9Lc6KELrL2nBkzNn2"
 
 [programs.devnet]
-simple_admin = "sa3HiPEaDZk5JyU1CCmmRbcWnBc9U4TzHq42RWVUNQS"
+simple_admin = "sa4ihCaRZKuYZtY4fcdnNqx9vx9Lc6KELrL2nBkzNn2"
 
 [programs.localnet]
-simple_admin = "sa3HiPEaDZk5JyU1CCmmRbcWnBc9U4TzHq42RWVUNQS"
+simple_admin = "sa4ihCaRZKuYZtY4fcdnNqx9vx9Lc6KELrL2nBkzNn2"
 
 [registry]
 url = "https://api.apr.dev"

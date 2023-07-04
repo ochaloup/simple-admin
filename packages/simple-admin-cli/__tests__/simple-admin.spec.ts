@@ -183,7 +183,7 @@ describe('Create simple admin account using CLI', () => {
           provider.connection.rpcEndpoint,
           '--program-id',
           sdk.program.programId.toBase58(),
-          'print-admin',
+          'print-message',
           addressKeypair.publicKey.toBase58(),
           '--admin',
           adminPath,
@@ -195,7 +195,7 @@ describe('Create simple admin account using CLI', () => {
     ).toHaveMatchingSpawnOutput({
       code: 0,
       stderr: '',
-      stdout: /succesfully printed/,
+      stdout: /successfully printed/,
     })
     const data = await simpleAccount({
       sdk,

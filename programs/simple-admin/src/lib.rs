@@ -19,9 +19,12 @@ security_txt! {
 }
 
 #[constant]
-pub const PROGRAM_ID: &str = "sa3HiPEaDZk5JyU1CCmmRbcWnBc9U4TzHq42RWVUNQS";
+pub const PROGRAM_ID: &str = "sa4ihCaRZKuYZtY4fcdnNqx9vx9Lc6KELrL2nBkzNn2";
 
-declare_id!("sa3HiPEaDZk5JyU1CCmmRbcWnBc9U4TzHq42RWVUNQS");
+#[constant]
+pub const PRINT_MESSAGE_ACCOUNT_SEED: &[u8] = b"print_message";
+
+declare_id!("sa4ihCaRZKuYZtY4fcdnNqx9vx9Lc6KELrL2nBkzNn2");
 
 #[program]
 pub mod simple_admin {
@@ -34,8 +37,9 @@ pub mod simple_admin {
         ctx.accounts.process(params)
     }
 
-    pub fn print_admin(ctx: Context<PrintAdmin>, params: PrintAdminParams) -> Result<()> {
-        ctx.accounts.process(params)
+    pub fn print_message(ctx: Context<PrintMessage>, message: String) -> Result<()> {
+        ctx.accounts
+            .process(message, *ctx.bumps.get("print_account").unwrap())
     }
 }
 

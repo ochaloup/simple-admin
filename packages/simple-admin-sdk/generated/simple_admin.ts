@@ -5,7 +5,12 @@ export type SimpleAdmin = {
     {
       "name": "PROGRAM_ID",
       "type": "string",
-      "value": "\"sa3HiPEaDZk5JyU1CCmmRbcWnBc9U4TzHq42RWVUNQS\""
+      "value": "\"sa4ihCaRZKuYZtY4fcdnNqx9vx9Lc6KELrL2nBkzNn2\""
+    },
+    {
+      "name": "PRINT_MESSAGE_ACCOUNT_SEED",
+      "type": "bytes",
+      "value": "[112, 114, 105, 110, 116, 95, 109, 101, 115, 115, 97, 103, 101]"
     }
   ],
   "instructions": [
@@ -38,7 +43,7 @@ export type SimpleAdmin = {
       ]
     },
     {
-      "name": "printAdmin",
+      "name": "printMessage",
       "accounts": [
         {
           "name": "simpleAdminAccount",
@@ -49,19 +54,48 @@ export type SimpleAdmin = {
           "name": "admin",
           "isMut": false,
           "isSigner": true
+        },
+        {
+          "name": "printAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rentPayer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
         }
       ],
       "args": [
         {
-          "name": "params",
-          "type": {
-            "defined": "PrintAdminParams"
-          }
+          "name": "message",
+          "type": "string"
         }
       ]
     }
   ],
   "accounts": [
+    {
+      "name": "printAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "simpleAccount",
+            "type": "publicKey"
+          },
+          {
+            "name": "message",
+            "type": "string"
+          }
+        ]
+      }
+    },
     {
       "name": "simpleAccount",
       "type": {
@@ -74,6 +108,10 @@ export type SimpleAdmin = {
           {
             "name": "printCallCount",
             "type": "u64"
+          },
+          {
+            "name": "createdAccountNextIndex",
+            "type": "u32"
           }
         ]
       }
@@ -91,18 +129,6 @@ export type SimpleAdmin = {
           }
         ]
       }
-    },
-    {
-      "name": "PrintAdminParams",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "message",
-            "type": "string"
-          }
-        ]
-      }
     }
   ],
   "events": [
@@ -117,7 +143,7 @@ export type SimpleAdmin = {
       ]
     },
     {
-      "name": "PrintAdminEvent",
+      "name": "PrintMessageEvent",
       "fields": [
         {
           "name": "admin",
@@ -127,6 +153,21 @@ export type SimpleAdmin = {
         {
           "name": "message",
           "type": "string",
+          "index": false
+        },
+        {
+          "name": "printAccount",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "printCallCount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "createdAccountNextIndex",
+          "type": "u32",
           "index": false
         }
       ]
@@ -148,7 +189,12 @@ export const IDL: SimpleAdmin = {
     {
       "name": "PROGRAM_ID",
       "type": "string",
-      "value": "\"sa3HiPEaDZk5JyU1CCmmRbcWnBc9U4TzHq42RWVUNQS\""
+      "value": "\"sa4ihCaRZKuYZtY4fcdnNqx9vx9Lc6KELrL2nBkzNn2\""
+    },
+    {
+      "name": "PRINT_MESSAGE_ACCOUNT_SEED",
+      "type": "bytes",
+      "value": "[112, 114, 105, 110, 116, 95, 109, 101, 115, 115, 97, 103, 101]"
     }
   ],
   "instructions": [
@@ -181,7 +227,7 @@ export const IDL: SimpleAdmin = {
       ]
     },
     {
-      "name": "printAdmin",
+      "name": "printMessage",
       "accounts": [
         {
           "name": "simpleAdminAccount",
@@ -192,19 +238,48 @@ export const IDL: SimpleAdmin = {
           "name": "admin",
           "isMut": false,
           "isSigner": true
+        },
+        {
+          "name": "printAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rentPayer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
         }
       ],
       "args": [
         {
-          "name": "params",
-          "type": {
-            "defined": "PrintAdminParams"
-          }
+          "name": "message",
+          "type": "string"
         }
       ]
     }
   ],
   "accounts": [
+    {
+      "name": "printAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "simpleAccount",
+            "type": "publicKey"
+          },
+          {
+            "name": "message",
+            "type": "string"
+          }
+        ]
+      }
+    },
     {
       "name": "simpleAccount",
       "type": {
@@ -217,6 +292,10 @@ export const IDL: SimpleAdmin = {
           {
             "name": "printCallCount",
             "type": "u64"
+          },
+          {
+            "name": "createdAccountNextIndex",
+            "type": "u32"
           }
         ]
       }
@@ -234,18 +313,6 @@ export const IDL: SimpleAdmin = {
           }
         ]
       }
-    },
-    {
-      "name": "PrintAdminParams",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "message",
-            "type": "string"
-          }
-        ]
-      }
     }
   ],
   "events": [
@@ -260,7 +327,7 @@ export const IDL: SimpleAdmin = {
       ]
     },
     {
-      "name": "PrintAdminEvent",
+      "name": "PrintMessageEvent",
       "fields": [
         {
           "name": "admin",
@@ -270,6 +337,21 @@ export const IDL: SimpleAdmin = {
         {
           "name": "message",
           "type": "string",
+          "index": false
+        },
+        {
+          "name": "printAccount",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "printCallCount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "createdAccountNextIndex",
+          "type": "u32",
           "index": false
         }
       ]

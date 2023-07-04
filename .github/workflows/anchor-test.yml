@@ -1,10 +1,10 @@
 name: Anchor Test
 
 on:
-  # push:
-  #    branches: [ main ]
-  # pull_request:
-  #   branches: [ main ]
+  push:
+     branches: [ v2 ]
+  pull_request:
+    branches: [ v2 ]
 
 jobs:
   anchor-test:
@@ -21,7 +21,7 @@ jobs:
       - name: Info on AVM
         run: |
           avm list
-          avm use 0.27.0
+          avm use 0.27.0 // TODO: use latest 0.28.0
       - name: Checkout project
         uses: actions/checkout@v3
 

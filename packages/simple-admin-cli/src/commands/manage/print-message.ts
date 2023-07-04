@@ -2,16 +2,16 @@ import { parsePubkeyOrKeypair } from '@marinade.finance/solana-cli-utils'
 import { Keypair, PublicKey } from '@solana/web3.js'
 import { Command } from 'commander'
 import { useContext } from '../../context'
-import { simpleAccount, withPrintAdmin } from 'simple-admin-sdk'
+import { simpleAccount, withPrintMessage } from 'simple-admin-sdk'
 import { executeTx } from '../utils'
 import {
   TransactionEnvelope,
   TransactionReceipt,
 } from '@saberhq/solana-contrib'
 
-export function installPrintAdmin(program: Command) {
+export function installPrintMessage(program: Command) {
   program
-    .command('print-admin')
+    .command('print-message')
     .description('Print a message when you are an admin.')
     .argument('address', 'Address of simple account ', parsePubkeyOrKeypair)
     .option(
@@ -31,7 +31,7 @@ export function installPrintAdmin(program: Command) {
           message: string
         }
       ) => {
-        await managePrintAdmin({
+        await managePrintMessage({
           address: await address,
           admin: await admin,
           message,
@@ -40,7 +40,7 @@ export function installPrintAdmin(program: Command) {
     )
 }
 
-async function managePrintAdmin({
+async function managePrintMessage({
   address,
   admin,
   message,
@@ -73,7 +73,7 @@ async function managePrintAdmin({
   if (admin instanceof Keypair) {
     tx.addSigners(admin)
   }
-  await withPrintAdmin(tx.instructions, {
+  await withPrintMessage(tx.instructions, {
     sdk,
     address,
     admin: adminAddress,
@@ -85,7 +85,7 @@ async function managePrintAdmin({
     `'Failed to print message '${message}' at account ${address.toBase58()} with admin ${adminAddress.toBase58()}`
   )
   logger.info(
-    `Message '${message}' succesfully printed for account ${address.toBase58()}` +
+    `Message '${message}' successfully printed for account ${address.toBase58()}` +
       (sig instanceof TransactionReceipt
         ? ` with signature ${sig.signature}`
         : '')

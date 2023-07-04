@@ -1,3 +1,3 @@
-pub mod simple_account;
+pub mod simple_admin_events;
 
-pub use simple_account::*;
+pub use simple_admin_events::*;

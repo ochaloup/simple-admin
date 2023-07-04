@@ -22,7 +22,7 @@
     "@marinade.finance/kedgeree-sdk": "^1.0.3",
     "@marinade.finance/marinade-ts-sdk": "^4.0.4",
     "@marinade.finance/solana-cli-utils": "^0.0.65",
-    "@coral-xyz/anchor": "^0.27.0",
+    "@coral-xyz/anchor": "^0.28.0",
     "@quarryprotocol/quarry-sdk": "^5.2.0",
     "@saberhq/anchor-contrib": "^1.14.11",
     "@saberhq/solana-contrib": "^1.14.11",
