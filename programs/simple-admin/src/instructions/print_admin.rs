@@ -16,6 +16,11 @@ pub struct PrintAdminParams {
     message: String,
 }
 
+/**
+ * Instruction to print a message to transaction log.
+ * Only transaction signed with admin key is permitted to call this instruction.
+ * The admin key is stored in the SimpleAccount.
+ */
 impl<'info> PrintAdmin<'info> {
     pub fn process(&mut self, PrintAdminParams { message }: PrintAdminParams) -> Result<()> {
         msg!("{}", message);
