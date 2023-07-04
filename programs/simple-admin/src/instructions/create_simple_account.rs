@@ -26,6 +26,11 @@ pub struct CreateSimpleAccountParams {
     admin: Pubkey,
 }
 
+/**
+ * Instruction to create a SimpleAccount.
+ * The admin key is stored in the SimpleAccount.
+ * Whoever may call this instruction and such be the admin of that particular SimpleAccount.
+ */
 impl<'info> CreateSimpleAccount<'info> {
     pub fn process(
         &mut self,

@@ -3,6 +3,7 @@ use crate::events::simple_account::PrintAdminEvent;
 use crate::state::simple_account::SimpleAccount;
 use anchor_lang::prelude::*;
 
+
 #[derive(Accounts)]
 pub struct PrintAdmin<'info> {
     #[account(mut, has_one = admin @ SimpleAdminError::InvalidAdmin)]
@@ -16,6 +17,11 @@ pub struct PrintAdminParams {
     message: String,
 }
 
+/**
+ * Instruction to print a message to transaction log.
+ * Only transaction signed with admin key is permitted to call this instruction.
+ * The admin key is stored in the SimpleAccount.
+ */
 impl<'info> PrintAdmin<'info> {
     pub fn process(&mut self, PrintAdminParams { message }: PrintAdminParams) -> Result<()> {
         msg!("{}", message);
