@@ -7,6 +7,7 @@ use anchor_lang::prelude::*;
 use anchor_lang::solana_program::system_program;
 
 #[derive(Accounts)]
+#[instruction(message: String)]
 pub struct PrintMessage<'info> {
     #[account(mut, has_one = admin @ SimpleAdminError::InvalidAdmin)]
     pub simple_admin_account: Account<'info, SimpleAccount>,
@@ -16,7 +17,7 @@ pub struct PrintMessage<'info> {
     #[account(
       init,
       payer = rent_payer,
-      space = 8 + std::mem::size_of::<PrintAccount>(),
+      space = 8 + 32 + message.len() + 8 + 4,
       seeds = [
         PRINT_MESSAGE_ACCOUNT_SEED,
         simple_admin_account.key().as_ref(),

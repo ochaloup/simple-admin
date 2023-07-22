@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     # from https://github.com/ochaloup/projectserum-build-docker
-    container: docker.io/ochaloup/projectserum-build:v0.27.0_rust1.68-nightly_sol1.14.16_avm
+    container: docker.io/ochaloup/projectserum-build:v0.28.0_sol1.14.21_avm
     steps:
       - name: /root/.cargo to PATH
         run: |
@@ -21,7 +21,7 @@ jobs:
       - name: Info on AVM
         run: |
           avm list
-          avm use 0.27.0 // TODO: use latest 0.28.0
+          avm use 0.28.0
       - name: Checkout project
         uses: actions/checkout@v3
 

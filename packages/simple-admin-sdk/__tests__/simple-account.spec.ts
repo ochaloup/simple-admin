@@ -87,7 +87,7 @@ describe('Create simple admin account', () => {
       )
     })
 
-    const message = 'gm gm'
+    const message = 'gm gm Solana'
 
     const tx = new TransactionEnvelope(
       solanaProvider,
