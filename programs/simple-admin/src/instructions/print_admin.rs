@@ -3,7 +3,6 @@ use crate::events::simple_account::PrintAdminEvent;
 use crate::state::simple_account::SimpleAccount;
 use anchor_lang::prelude::*;
 
-
 #[derive(Accounts)]
 pub struct PrintAdmin<'info> {
     #[account(mut, has_one = admin @ SimpleAdminError::InvalidAdmin)]
