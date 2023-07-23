@@ -32,18 +32,19 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 7
+          version: 8
 
       - name: Set nightly toolchain
         run: rustup default nightly
       - name: List rustup toolchains
         run: rustup toolchain list
-      - name: Generate new keygen
-        run: |
-          solana-keygen new --no-bip39-passphrase
-          solana-keygen new --no-bip39-passphrase -o /root/.config/solana/id.json
-      - name: Set solana target cluster to local
-        run: solana config set --url http:localhost:8899
+      # pre-generated in docker image
+      # - name: Generate new keygen
+      #   run: |
+      #     solana-keygen new --no-bip39-passphrase
+      #     solana-keygen new --no-bip39-passphrase -o /root/.config/solana/id.json
+      # - name: Set solana target cluster to local
+      #   run: solana config set --url http:localhost:8899
       - name: Check solana config
         run: solana config get
 
