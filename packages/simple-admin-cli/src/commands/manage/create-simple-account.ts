@@ -77,6 +77,6 @@ async function manageCreateSimpleAccount({
     `'Failed to create simple admin account ${addressPubkey.toBase58()}`
   )
   logger.info(
-    `Simple admin account ${addressPubkey.toBase58()} with admin ${admin?.toBase58()} succesfully created`
+    `Simple admin account ${addressPubkey.toBase58()} with admin ${admin?.toBase58()} successfully created`
   )
 }

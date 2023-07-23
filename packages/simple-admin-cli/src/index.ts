@@ -29,7 +29,7 @@ const program = new Command()
 program
   .version('0.0.1')
   .allowExcessArguments(false)
-  .option('-c, --cluster <cluster>', 'Solana cluster', 'http://localhost:8899')
+  .option('-u, --cluster <cluster>', 'Solana cluster', 'http://localhost:8899')
   .option('--commitment <commitment>', 'Commitment', 'confirmed')
   .option(
     '-k, --keypair <keypair>',
@@ -37,7 +37,7 @@ program
     parseKeypair
   )
   .option(
-    '--program-id <pubkey>',
+    '-i, --program-id <pubkey>',
     `Program id of simple admin contract (default: ${DEFAULT_SIMPLE_ADMIN_PROGRAM_ID})`,
     parsePubkey,
     parsePubkey(DEFAULT_SIMPLE_ADMIN_PROGRAM_ID)

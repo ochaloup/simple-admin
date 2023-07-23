@@ -20,21 +20,29 @@ export function installPrintMessage(program: Command) {
       parsePubkeyOrKeypair
     )
     .requiredOption('--message <string>', 'Message to print')
+    .option(
+      '--rent-payer <keypair>',
+      'Rent payer for print account creation',
+      parsePubkeyOrKeypair
+    )
     .action(
       async (
         address: Promise<PublicKey | Keypair>,
         {
           admin,
           message,
+          rentPayer,
         }: {
           admin?: Promise<PublicKey | Keypair>
           message: string
+          rentPayer?: Promise<PublicKey | Keypair>
         }
       ) => {
         await managePrintMessage({
           address: await address,
           admin: await admin,
           message,
+          rentPayer: await rentPayer,
         })
       }
     )
@@ -44,10 +52,12 @@ async function managePrintMessage({
   address,
   admin,
   message,
+  rentPayer,
 }: {
   address: PublicKey | Keypair
   admin?: PublicKey | Keypair
   message: string
+  rentPayer?: PublicKey | Keypair
 }) {
   const { sdk, provider, logger } = useContext()
 
@@ -57,6 +67,10 @@ async function managePrintMessage({
       ? admin.publicKey
       : // when not set using wallet pubkey
         (admin || sdk.program.provider.publicKey)!
+  const rentPayerAddress =
+    rentPayer instanceof Keypair
+      ? rentPayer.publicKey
+      : (rentPayer || sdk.program.provider.publicKey)!
 
   const simpleAccountData = await simpleAccount({ sdk, address })
   if (!simpleAccountData) {
@@ -73,11 +87,15 @@ async function managePrintMessage({
   if (admin instanceof Keypair) {
     tx.addSigners(admin)
   }
+  if (rentPayer instanceof Keypair) {
+    tx.addSigners(rentPayer)
+  }
   await withPrintMessage(tx.instructions, {
     sdk,
     address,
     admin: adminAddress,
     message,
+    rentPayer: rentPayerAddress,
   })
 
   const sig = await executeTx(

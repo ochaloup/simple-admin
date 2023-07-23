@@ -61,7 +61,17 @@ export const setContext = ({
   command: string
 }) => {
   try {
-    cluster = clusterApiUrl(cluster as Cluster)
+    const clusterUrl =
+      cluster === 'd'
+        ? 'devnet'
+        : cluster === 't'
+        ? 'testnet'
+        : cluster === 'm' || cluster === 'mainnet'
+        ? 'mainnet-beta'
+        : cluster === 'l' || cluster === 'localnet' || cluster === 'localhost'
+        ? 'http://localhost:8899'
+        : cluster
+    cluster = clusterApiUrl(clusterUrl as Cluster)
   } catch (e) {
     // ignore
   }

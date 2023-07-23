@@ -4,12 +4,22 @@ import { PrintAccount, SimpleAccount, SimpleAdminSdk } from './sdk'
 
 export async function simpleAccount({
   sdk,
-  address,
+  address, // simple account address
 }: {
   sdk: SimpleAdminSdk
   address: PublicKey
 }): Promise<SimpleAccount | null> {
   return sdk.program.account.simpleAccount.fetchNullable(address)
+}
+
+export async function printAccount({
+  sdk,
+  address, // print account address
+}: {
+  sdk: SimpleAdminSdk
+  address: PublicKey
+}): Promise<PrintAccount | null> {
+  return sdk.program.account.printAccount.fetchNullable(address)
 }
 
 export async function findSimpleAccounts({

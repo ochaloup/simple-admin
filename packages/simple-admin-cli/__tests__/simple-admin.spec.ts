@@ -92,7 +92,7 @@ describe('Create simple admin account using CLI', () => {
           'pnpm',
           [
             'cli',
-            '-c',
+            '-u',
             provider.connection.rpcEndpoint,
             '--program-id',
             sdk.program.programId.toBase58(),
@@ -109,7 +109,7 @@ describe('Create simple admin account using CLI', () => {
       ).toHaveMatchingSpawnOutput({
         code: 0,
         stderr: '',
-        stdout: /succesfully created/,
+        stdout: /successfully created/,
       })
     } finally {
       await cleanupRentPayer()
@@ -144,7 +144,7 @@ describe('Create simple admin account using CLI', () => {
         'pnpm',
         [
           'cli',
-          '-c',
+          '--cluster',
           provider.connection.rpcEndpoint,
           '--program-id',
           sdk.program.programId.toBase58(),
@@ -158,7 +158,7 @@ describe('Create simple admin account using CLI', () => {
     ).toHaveMatchingSpawnOutput({
       code: 0,
       stderr: '',
-      stdout: /succesfully created/,
+      stdout: /successfully created/,
     })
     await expect(
       provider.connection.getAccountInfo(addressKeypair.publicKey)
@@ -179,7 +179,7 @@ describe('Create simple admin account using CLI', () => {
         'pnpm',
         [
           'cli',
-          '-c',
+          '-u',
           provider.connection.rpcEndpoint,
           '--program-id',
           sdk.program.programId.toBase58(),
