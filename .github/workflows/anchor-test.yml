@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     # from https://github.com/ochaloup/projectserum-build-docker
-    container: docker.io/ochaloup/projectserum-build:v0.28.0_sol1.14.21_avm
+    container: docker.io/ochaloup/projectserum-build:v0.28.0_sol1.14.21_avm-v2
     steps:
       - name: /root/.cargo to PATH
         run: |
