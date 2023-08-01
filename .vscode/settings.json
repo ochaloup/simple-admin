@@ -1,0 +1,23 @@
+{
+    "rust-analyzer.showUnlinkedFileNotification": false,
+    "cSpell.words": [
+        "clippy",
+        "devnet",
+        "gokiprotocol",
+        "jsbi",
+        "keygen",
+        "Keypair",
+        "LAMPORTS",
+        "localnet",
+        "nodewallet",
+        "ochaloup",
+        "pino",
+        "posttest",
+        "projectserum",
+        "pubkey",
+        "quarryprotocol",
+        "rustup",
+        "saberhq",
+        "solana"
+    ]
+}
